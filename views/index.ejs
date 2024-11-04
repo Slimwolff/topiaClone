@@ -12,20 +12,43 @@
         
         let arr = <%-JSON.stringify(noise)%>
 
-        window.onload = () => {
+        window.onload = (arr) => {
             init(arr);
         }
 
 
-        function init() {
+        function init(arr) {
             
             let canvas = document.getElementById("canvas")
             let ctx = canvas.getContext("2d");
 
-            function init(arr) {
+
+            let levels {
+                0: "#FFFFFF"
+                1: "#D4D4D4",
+                2: "#909090",
+                3: "#494848"
+            }
+
+
+            function rect(x,y,color, m) {
+                let w = 50;
+                let h = 50;
+                ctx.beginPath();
+                ctx.fillStyle = color;
+                ctx.rect(x * m,0,w,h)
+                ctx.closePath()
+            }
+
+
+
+            function draw(arr) {
                 ctx.fillStyle = 'rgb(255 255 230 100%)';
                 ctx.fillRect(0,0, canvas.width, canvas.height)
 
+                for(let i = 0; i < arr; i++) {
+                    rect(1,0,levels.2,i)
+                }
                 ctx.stroke()
             }
         }

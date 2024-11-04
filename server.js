@@ -9,13 +9,14 @@ let n = Noise(33,11, {
     persistence: 0.8
 })
 
+console.log(n)
 const app = express()
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.get('/', (req,res) => {
-    res.render('index', { noise: n })
+    res.render('index', { noise: n[1] })
 })
 
 app.listen(5000, () => {

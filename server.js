@@ -2,7 +2,7 @@ import express from
 'express'
 import Noise from './src/noise.js'
 
-let n = Noise(33,11, {
+let n = Noise(11,5, {
     amplitude: 1.1,
     frequency: 0.25,
     octaves: 3,

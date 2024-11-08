@@ -4,6 +4,10 @@ class Match {
         this.players = players
         this.map = map
     }
+
+    gameState(playerId) {
+        let 
+    }
 }
 
 class Map {
@@ -38,8 +42,24 @@ class Map {
 class MapTile {
     constructor() {
         this.terrain = "";
-        this.unit = {};
-        this.building = {};
+        this.unit = [];
+        this.building = [];
         this.owner = ""
+        this.visibility = []
+    }
+
+    addBuilding() {
+
+    }
+    
+    removeBuilding() {
+
+    }
+
+    addUnit() {
+
+    }
+    removeUnit() {
+
     }
 }

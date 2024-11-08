@@ -1,25 +1,38 @@
-import express from 
-'express'
-import Noise from './src/noise.js'
+import path from 'path';
+import { fileURLToPath } from 'url';
+import express from 'express'
+import { createServer } from 'http';
+import { Server } from 'socket.io';
 
-let n = Noise(11,5, {
-    amplitude: 1.1,
-    frequency: 0.25,
-    octaves: 3,
-    persistence: 0.8
-})
-
-console.log(n)
 const app = express()
+const httpServer = createServer(app)
+const io = new Server(httpServer);
 
-app.set('view engine', 'ejs');
-app.set('views', './views');
+const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+const __dirname = path.dirname(__filename); // get the name of the directory
 
-app.get('/', (req,res) => {
-    res.render('index', { noise: n[1] })
+
+
+app.use(express.static(__dirname + "/public"));
+
+app.get("/", (req,res) => {
+  let absolutePath = __dirname + 'index.html'
+  console.log('dirname: ',__dirname)	
+  res.sendFile(absolutePath)
+});	
+
+io.on('connection', (socket) => {
+  console.log('connected to socket.io');
+
+  socket.on('action', (a) => {
+    console.log(a)
+  })
 })
 
-app.listen(5000, () => {
+
+
+
+httpServer.listen(5000, () => {
     console.log(`Server Running on ${5000} port.`);
     
 })

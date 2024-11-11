@@ -15,7 +15,7 @@ class Character {
     }
 
     atk() {
-
+        
     }
 
     receiveAtk(enemyAtk) {

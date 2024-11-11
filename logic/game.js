@@ -1,12 +1,18 @@
 class Match {
-    constructor(gameID, players, map, ) {
+    constructor(gameID, players, map ) {
         this.id = gameID
         this.players = players
         this.map = map
+        this.gameWinner = ""
     }
 
     gameState(playerId) {
-        let 
+
+    }
+
+    
+    async start() {
+        
     }
 }
 
@@ -15,8 +21,6 @@ class Map {
         this.seed = seed == undefined ? null : seed;
         this.mapGrid = mapGrid;
         this.tile = [];
-        this.units = [];
-        this.buildings = [];
     }
 
     buildMap() {
@@ -31,6 +35,11 @@ class Map {
     moveUnit() {
 
     }
+
+    deleteUnit() {
+
+    }
+
     newBuilding() {
 
     }
@@ -45,7 +54,7 @@ class MapTile {
         this.unit = [];
         this.building = [];
         this.owner = ""
-        this.visibility = []
+        this.visibility = [];
     }
 
     addBuilding() {

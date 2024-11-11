@@ -3,6 +3,8 @@ import { fileURLToPath } from 'url';
 import express from 'express'
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import gameController from './controller/matchHandle';
+
 
 const app = express()
 const httpServer = createServer(app)

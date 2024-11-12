@@ -11,7 +11,7 @@ class Match {
     }
 
     
-    async start() {
+    start() {
         
     }
 }
@@ -72,3 +72,35 @@ class MapTile {
 
     }
 }
+
+
+export default class Room {
+    constructor(id, owner) {
+        this.id = id;
+        this.users = [owner]; //change players to user because player has logic to game match
+        this.owner = owner;
+        this.mapDetails = {};
+        this.private = false;
+        this.password = null;
+        this.match = {}
+    }
+
+    addUser(userId) { //change players to user because player has logic to game match
+        if(!this.players.includes(userId)){
+            this.players.push(userId)
+        }
+        
+    }
+    defineRules() {
+
+    }
+    startGame() {
+        this.match = new Match('uuid',this.users,new Map(12345,16));
+        //change logic to create player instance
+        //at startGame in Match class
+        this.match.map.buildMap();
+        console.log(this.match);
+    }
+}
+
+ 

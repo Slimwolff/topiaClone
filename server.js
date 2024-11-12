@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import express from 'express'
 import { createServer } from 'http';
 import { Server } from 'socket.io';
-import gameController from './controller/matchHandle';
+import eventHandlers from './controller/eventHandlers.js';
 
 
 const app = express()
@@ -26,9 +26,7 @@ app.get("/", (req,res) => {
 io.on('connection', (socket) => {
   console.log('connected to socket.io');
 
-  socket.on('action', (a) => {
-    console.log(a)
-  })
+  eventHandlers.gameRoom(socket);
 })
 
 

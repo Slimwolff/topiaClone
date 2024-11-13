@@ -1,7 +1,11 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
-import express from 'express'
+
 import { createServer } from 'http';
+
+import express from 'express'
+import session from 'express-session';
+
 import { Server } from 'socket.io';
 import eventHandlers from './controller/eventHandlers.js';
 

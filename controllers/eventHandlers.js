@@ -1,4 +1,4 @@
-import Room from "../logic/game.js"
+import {Room, User} from "../models/index.js"
 
 const ROOMS = {
     $: []
@@ -7,16 +7,18 @@ const ROOMS = {
 // Create game room to host the match
 function gameRoom(socket) {
     
-    socket.on('newHost', ()=> {
-        let r = new Room(12456,'playerId')
-        ROOMS.$.push(r)
-        console.log(ROOMS);
-        console.log(ROOMS.$);
+    // Create new room to host
+    socket.on('newHost', (a,b)=> {
+        console.log('newHost requested!!',a,b)
+    })
+    // Client search for active host server anwser list of rooms availabe
+    socket.on('fetchHosts', () => {
+        socket.emit('hostsAvailable', ROOMS.$)
+    })
 
-        ROOMS.$[0].startGame()
-
-        console.log(ROOMS.$[0]);
-
+    // Client joins to target host if possible
+    socket.on('joinRoom', (roomIndex,userSession) => {
+        ROOMS.$[roomIndex].addUser(userId)
     })
 
 }

@@ -95,11 +95,17 @@ export default class Room {
 
     }
     startGame() {
-        this.match = new Match('uuid',this.users,new Map(12345,16));
-        //change logic to create player instance
-        //at startGame in Match class
-        this.match.map.buildMap();
-        console.log(this.match);
+        //verify if all users are ready
+        let allReady = this.users.every(u => u.ready == true)
+        if(allReady){
+            this.match = new Match('uuid',this.users,new Map(12345,16));
+            this.match.map.buildMap();
+            console.log(this.match);
+        }else {
+            throw new Error("users not ready yet!")
+        }
+
+        
     }
 }
 

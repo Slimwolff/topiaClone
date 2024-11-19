@@ -6,13 +6,26 @@ class Match {
         this.gameWinner = ""
     }
 
-    gameState(playerId) {
+    // return array that contains tile info for all players
+    // arr must be used by Game Events
+    gameState() {
 
+        let mapUpdate = []
+
+        for(let i = 0; i < this.players.length; i++) {
+            mapUpdate[i] = []
+            for(let m = 0; this.map.tile.length; m++) {
+                if(this.map.tile[m].visibility.includes(this.players[i])) {
+                    mapUpdate[i].push(this.map.tile[m])
+                }
+            }
+        }
+        return mapUpdate
     }
 
     
     start() {
-        
+        this.map.buildMap()
     }
 }
 
@@ -49,7 +62,9 @@ class Map {
 }
 
 class MapTile {
-    constructor() {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
         this.terrain = "";
         this.unit = [];
         this.building = [];
@@ -89,7 +104,6 @@ export default class Room {
         if(!this.users.includes(userId)){
             this.users.push(userId)
         }
-        
     }
     defineRules() {
 
@@ -99,7 +113,7 @@ export default class Room {
         let allReady = this.users.every(u => u.ready == true)
         if(allReady){
             this.match = new Match('uuid',this.users,new Map(12345,16));
-            this.match.map.buildMap();
+            // change match to call buildMap in new Match
             console.log(this.match);
         }else {
             throw new Error("users not ready yet!")

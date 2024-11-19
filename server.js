@@ -2,12 +2,11 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { createServer } from 'http';
-
 import express from 'express'
 import session from 'express-session';
 
 import { Server } from 'socket.io';
-import eventHandlers from './controller/eventHandlers.js';
+import eventHandlers from './controllers/eventHandlers.js';
 
 
 const app = express()
@@ -17,6 +16,15 @@ const io = new Server(httpServer);
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); // get the name of the directory
 
+app.use(session({
+  secret: 'process.env.SECRET',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false,
+    httpOnly: true
+  }
+}))
 
 
 app.use(express.static(__dirname + "/public"));
@@ -32,9 +40,6 @@ io.on('connection', (socket) => {
 
   eventHandlers.gameRoom(socket);
 })
-
-
-
 
 httpServer.listen(5000, () => {
     console.log(`Server Running on ${5000} port.`);
